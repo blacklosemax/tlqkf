@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>MBTI 노래 추천</title>
+
+<style>
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+}
+
+.container {
+    text-align: center;
+    background: rgba(255,255,255,0.1);
+    padding: 30px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    width: 420px;
+}
+
+h1 {
+    margin-bottom: 15px;
+}
+
+#result {
+    margin: 20px 0;
+    min-height: 70px;
+}
+
+button {
+    border: none;
+    border-radius: 25px;
+    padding: 10px 15px;
+    margin: 5px;
+    cursor: pointer;
+    color: white;
+    background: linear-gradient(45deg, #ff6a00, #ee0979);
+    transition: 0.3s;
+    font-size: 14px;
+}
+
+button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.random-btn {
+    margin-top: 10px;
+    padding: 12px 25px;
+    font-size: 16px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin-top: 10px;
+}
+
+.mbti {
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.song {
+    font-size: 18px;
+    margin-top: 5px;
+}
+
+.fade {
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(10px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>🎵 MBTI 노래 추천</h1>
+
+    <div id="result">MBTI를 선택하거나 랜덤 추천을 눌러주세요</div>
+
+    <div class="grid">
+        <button onclick="recommendMBTI('INTJ')">INTJ</button>
+        <button onclick="recommendMBTI('INTP')">INTP</button>
+        <button onclick="recommendMBTI('ENTJ')">ENTJ</button>
+        <button onclick="recommendMBTI('ENTP')">ENTP</button>
+
+        <button onclick="recommendMBTI('INFJ')">INFJ</button>
+        <button onclick="recommendMBTI('INFP')">INFP</button>
+        <button onclick="recommendMBTI('ENFJ')">ENFJ</button>
+        <button onclick="recommendMBTI('ENFP')">ENFP</button>
+
+        <button onclick="recommendMBTI('ISTJ')">ISTJ</button>
+        <button onclick="recommendMBTI('ISFJ')">ISFJ</button>
+        <button onclick="recommendMBTI('ESTJ')">ESTJ</button>
+        <button onclick="recommendMBTI('ESFJ')">ESFJ</button>
+
+        <button onclick="recommendMBTI('ISTP')">ISTP</button>
+        <button onclick="recommendMBTI('ISFP')">ISFP</button>
+        <button onclick="recommendMBTI('ESTP')">ESTP</button>
+        <button onclick="recommendMBTI('ESFP')">ESFP</button>
+    </div>
+
+    <button class="random-btn" onclick="recommendRandom()">🎲 랜덤 추천</button>
+</div>
+
+<script>
+const music = {
+    "INTJ": ["IU - Love poem", "Coldplay - Fix You"],
+    "INTP": ["Radiohead - Creep", "검정치마 - Everything"],
+    "ENTJ": ["Imagine Dragons - Believer", "BTS - Not Today"],
+    "ENTP": ["Justin Timberlake - Can't Stop The Feeling", "AKMU - How can I love"],
+    "INFJ": ["Billie Eilish - lovely", "아이유 - 밤편지"],
+    "INFP": ["Sam Smith - Stay With Me", "태연 - 사계"],
+    "ENFJ": ["마크툽 - 오늘도 빛나는 너에게", "Ed Sheeran - Photograph"],
+    "ENFP": ["Pharrell Williams - Happy", "아이브 - LOVE DIVE"],
+    "ISTJ": ["Adele - Someone Like You", "성시경 - 너의 모든 순간"],
+    "ISFJ": ["백예린 - Maybe It's Not Our Fault", "폴킴 - 모든 날, 모든 순간"],
+    "ESTJ": ["Queen - We Will Rock You", "싸이 - 챔피언"],
+    "ESFJ": ["TWICE - Cheer Up", "Bruno Mars - Just The Way You Are"],
+    "ISTP": ["Post Malone - Circles", "Zion.T - 꺼내 먹어요"],
+    "ISFP": ["Crush - Beautiful", "헤이즈 - And July"],
+    "ESTP": ["Drake - God's Plan", "GD - Crooked"],
+    "ESFP": ["Dua Lipa - Don't Start Now", "뉴진스 - Hype Boy"]
+};
+
+function showResult(mbti) {
+    const songs = music[mbti];
+    const randomSong = songs[Math.floor(Math.random() * songs.length)];
+
+    document.getElementById("result").innerHTML =
+        `<div class="fade">
+            <div class="mbti">${mbti}</div>
+            <div class="song">🎧 ${randomSong}</div>
+        </div>`;
+}
+
+function recommendMBTI(mbti) {
+    showResult(mbti);
+}
+
+function recommendRandom() {
+    const mbtiList = Object.keys(music);
+    const randomMBTI = mbtiList[Math.floor(Math.random() * mbtiList.length)];
+    showResult(randomMBTI);
+}
+</script>
+
+</body>
+</html>
